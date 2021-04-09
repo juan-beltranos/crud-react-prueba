@@ -3,7 +3,7 @@
 }
 
 .app__sidebar {
-  background-color: $dark-grey;
+  background-color: $primary;
   color: white;
   display: flex;
   flex-direction: column;
@@ -47,7 +47,7 @@
 .app__entry {
   background-color: white;
   border-radius: 4px;
-  color: $dark-grey;
+  color: $primary;
   display: flex;
   justify-content: space-around;
   margin-bottom: 10px;
@@ -55,8 +55,8 @@
 }
 
 .app__entry-picture {
-  height: 100px;
-  width: 75px;
+  height: 120px;
+  width: 200px;
 }
 
 .app__entry-body {
