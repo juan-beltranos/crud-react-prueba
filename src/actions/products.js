@@ -5,7 +5,7 @@ import { types } from "../types/types";
 import { loadProducts } from "../helpers/loadProducts";
 import { fileUpload } from "../helpers/fileUpload";
 
-export const startNewNote = () => {
+export const startNewProduct = () => {
   return async (dispatch, getState) => {
     const { uid } = getState().auth;
 
@@ -19,71 +19,71 @@ export const startNewNote = () => {
 
     const doc = await db.collection(`${uid}/crud/products`).add(newProduct);
 
-    dispatch(activeNote(doc.id, newProduct));
-    dispatch(addNewNote(doc.id, newProduct));
+    dispatch(activeProduct(doc.id, newProduct));
+    dispatch(addNewProduct(doc.id, newProduct));
   };
 };
 
-export const activeNote = (id, note) => ({
-  type: types.notesActive,
+export const activeProduct = (id, product) => ({
+  type: types.productsActive,
   payload: {
     id,
-    ...note,
+    ...product,
   },
 });
 
-export const addNewNote = (id, note) => ({
-  type: types.notesAddNew,
+export const addNewProduct = (id, product) => ({
+  type: types.productAddNew,
   payload: {
     id,
-    ...note,
+    ...product,
   },
 });
 
 export const startLoadingNotes = (uid) => {
   return async (dispatch) => {
-    const notes = await loadProducts(uid);
-    dispatch(setNotes(notes));
+    const products = await loadProducts(uid);
+    dispatch(setProducts(products));
   };
 };
 
-export const setNotes = (notes) => ({
-  type: types.notesLoad,
-  payload: notes,
+export const setProducts = (products) => ({
+  type: types.productsLoad,
+  payload: products,
 });
 
-export const startSaveNote = (note) => {
+export const startSaveProduct = (product) => {
   return async (dispatch, getState) => {
     const { uid } = getState().auth;
 
-    if (!note.url) {
-      delete note.url;
+    if (!product.url) {
+      delete product.url;
     }
 
-    const noteToFirestore = { ...note };
-    delete noteToFirestore.id;
+    const productToFirestore = { ...product };
+    delete productToFirestore.id;
 
-    await db.doc(`${uid}/crud/products/${note.id}`).update(noteToFirestore);
+    await db.doc(`${uid}/crud/products/${product.id}`).update(productToFirestore);
 
-    dispatch(refreshNote(note.id, noteToFirestore));
-    Swal.fire("Saved", note.title, "success");
+    dispatch(refreshProduct(product.id, productToFirestore));
+    Swal.fire("Saved", product.name, "success");
   };
 };
 
-export const refreshNote = (id, note) => ({
-  type: types.notesUpdated,
+export const refreshProduct = (id, product) => ({
+  type: types.productUpdated,
   payload: {
     id,
-    note: {
+    product: {
       id,
-      ...note,
+      ...product,
     },
   },
 });
 
 export const startUploading = (file) => {
   return async (dispatch, getState) => {
-    const { active: activeNote } = getState().notes;
+    const { active: activeProduct } = getState().products;
 
     Swal.fire({
       title: "Uploading...",
@@ -95,9 +95,9 @@ export const startUploading = (file) => {
     });
 
     const fileUrl = await fileUpload(file);
-    activeNote.url = fileUrl;
+    activeProduct.url = fileUrl;
 
-    dispatch(startSaveNote(activeNote));
+    dispatch(startSaveProduct(activeProduct));
 
     Swal.close();
   };
@@ -108,15 +108,15 @@ export const startDeleting = (id) => {
     const uid = getState().auth.uid;
     await db.doc(`${uid}/crud/products/${id}`).delete();
 
-    dispatch(deleteNote(id));
+    dispatch(deleteProduct(id));
   };
 };
 
-export const deleteNote = (id) => ({
-  type: types.notesDelete,
+export const deleteProduct = (id) => ({
+  type: types.productsDelete,
   payload: id,
 });
 
 export const noteLogout = () => ({
-  type: types.notesLogoutCleaning,
+  type: types.productsLogoutCleaning,
 });

@@ -1,13 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { startSaveNote, startUploading } from "../../actions/notes";
+import { startSaveProduct, startUploading } from "../../actions/products";
 
 export const ProductsAppBar = () => {
   const dispatch = useDispatch();
-  const { active } = useSelector((state) => state.notes);
+  const { active } = useSelector((state) => state.products);
 
   const handleSave = () => {
-    dispatch(startSaveNote(active));
+    dispatch(startSaveProduct(active));
   };
 
   const handlePictureClick = () => {
@@ -22,7 +22,7 @@ export const ProductsAppBar = () => {
   };
 
   return (
-    <div className="notes__appbar">
+    <div className="products__appbar">
       <input
         id="fileSelector"
         type="file"

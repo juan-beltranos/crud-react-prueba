@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { ProductEntries } from "./ProductEntries";
 import { startLogout } from "../../actions/auth";
-import { startNewNote } from "../../actions/notes";
+import { startNewProduct } from "../../actions/products";
 
 export const Sidebar = () => {
   const dispatch = useDispatch();
@@ -14,12 +14,12 @@ export const Sidebar = () => {
   };
 
   const handleAddNew = () => {
-    dispatch(startNewNote());
+    dispatch(startNewProduct());
   };
 
   return (
-    <aside className="journal__sidebar">
-      <div className="journal__sidebar-navbar">
+    <aside className="app__sidebar">
+      <div className="app__sidebar-navbar">
         <h3 className="mt-5">
           <i className="far fa-user"></i>
           <span> {name}</span>
@@ -30,7 +30,7 @@ export const Sidebar = () => {
         </button>
       </div>
 
-      <div className="journal__new-entry" onClick={handleAddNew}>
+      <div className="app__new-entry" onClick={handleAddNew}>
         <i className="fas fa-shopping-cart fa-5x"></i>
         <p className="mt-5">New Product</p>
       </div>

@@ -3,26 +3,26 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { ProductsAppBar } from "./ProductsAppBar";
 import { useForm } from "../../hooks/useForm";
-import { activeNote, startDeleting } from "../../actions/notes";
+import { activeProduct, startDeleting } from "../../actions/products";
 
 export const ProductScreen = () => {
   const dispatch = useDispatch();
 
-  const { active: note } = useSelector((state) => state.notes);
-  const [formValues, handleInputChange, reset] = useForm(note);
+  const { active: product } = useSelector((state) => state.products);
+  const [formValues, handleInputChange, reset] = useForm(product);
   const { name, description, stock, price, id } = formValues;
 
-  const activeId = useRef(note.id);
+  const activeId = useRef(product.id);
 
   useEffect(() => {
-    if (note.id !== activeId.current) {
-      reset(note);
-      activeId.current = note.id;
+    if (product.id !== activeId.current) {
+      reset(product);
+      activeId.current = product.id;
     }
-  }, [note, reset]);
+  }, [product, reset]);
 
   useEffect(() => {
-    dispatch(activeNote(formValues.id, { ...formValues }));
+    dispatch(activeProduct(formValues.id, { ...formValues }));
   }, [formValues, dispatch]);
 
   const handleDelete = () => {
@@ -30,14 +30,14 @@ export const ProductScreen = () => {
   };
 
   return (
-    <div className="notes__main-content">
+    <div className="products__main-content">
       <ProductsAppBar />
 
-      <div className="notes__content">
+      <div className="products__content">
         <input
           type="text"
           placeholder="Name"
-          className="notes__title-input"
+          className="products__title-input"
           autoComplete="off"
           name="name"
           value={name}
@@ -46,7 +46,7 @@ export const ProductScreen = () => {
 
         <textarea
           placeholder="Description"
-          className="notes__textarea"
+          className="products__textarea"
           name="description"
           value={description}
           onChange={handleInputChange}
@@ -55,7 +55,7 @@ export const ProductScreen = () => {
         <input
          type="number" 
           placeholder="Stock"
-          className="notes__title-input"
+          className="products__title-input"
           autoComplete="off"
           name="stock"
           value={stock}
@@ -65,16 +65,16 @@ export const ProductScreen = () => {
         <input
          type="number" 
           placeholder="Price"
-          className="notes__title-input"
+          className="products__title-input"
           autoComplete="off"
           name="price"
           value={price}
           onChange={handleInputChange}
         />
 
-        {note.url && (
-          <div className="notes__image">
-            <img src={note.url} alt="imagen" />
+        {product.url && (
+          <div className="products__image">
+            <img src={product.url} alt="imagen" />
           </div>
         )}
       </div>

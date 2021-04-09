@@ -10,7 +10,7 @@ import { PrivateRoute } from "./PrivateRoute";
 import { ProductsScreen } from "../components/products/ProductsScreen";
 import { login } from "../actions/auth";
 import { PublicRoute } from "./PublicRoute";
-import { startLoadingNotes } from "../actions/notes";
+import { startLoadingNotes } from "../actions/products";
 
 export const AppRouter = () => {
   const dispatch = useDispatch();

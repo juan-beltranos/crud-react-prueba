@@ -1,11 +1,11 @@
-.notes__main-content {
+.products__main-content {
     display: flex;
     flex-direction: column;
     height: 100%;
 }
 
 
-.notes__appbar {
+.products__appbar {
     align-items: center;
     background-color: $primary;
     color: white;
@@ -15,7 +15,7 @@
 }
 
 
-.notes__content {
+.products__content {
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -23,7 +23,7 @@
 }
 
 
-.notes__title-input, .notes__textarea {
+.products__title-input, .products__textarea {
     border: 1px solid rgb(206, 199, 199);
     padding: 5px;
     border-radius: 10px;
@@ -33,13 +33,13 @@
     }
 }
 
-.notes__title-input {
+.products__title-input {
     color: $dark-grey;
     font-size: 15px;
     margin-bottom: 15px;
 }
 
-.notes__textarea {
+.products__textarea {
     border: 1px solid rgb(206, 199, 199);
     color: $dark-grey;
     margin-bottom: 15px;
@@ -47,7 +47,7 @@
     resize: none;
 }
 
-.notes__image img {
+.products__image img {
     box-shadow: 5px 5px rgb(236, 233, 233);
     height: 150px;
 }

@@ -1,20 +1,20 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
-import { JournalEntry } from './ProductEntry';
+import { ProductEntry } from './ProductEntry';
 
 export const ProductEntries = () => {
 
-    const { notes } = useSelector( state => state.notes );
-    //console.log(notes);
+    const { products } = useSelector( state => state.products );
+    //console.log(products);
 
     return (
-        <div className="journal__entries">
+        <div className="app__entries">
             
             {
-                notes.map( note => (
-                    <JournalEntry 
-                        key={ note.id }
-                        { ...note }
+                products.map( product => (
+                    <ProductEntry 
+                        key={ product.id }
+                        { ...product }
                     />
                 ))
             }

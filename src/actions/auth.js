@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 import { firebase, googleAuthProvider } from '../firebase/firebase-config';
 import { types } from '../types/types';
 import { startLoading, finishLoading } from './ui';
-import { noteLogout } from './notes';
+import { noteLogout } from './products';
 
 
 export const startLoginEmailPassword = (email, password) => {

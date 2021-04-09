@@ -1,13 +1,13 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { activeNote } from "../../actions/notes";
+import { activeProduct } from "../../actions/products";
 
-export const JournalEntry = ({ id, name, description, stock, price, url }) => {
+export const ProductEntry = ({ id, name, description, stock, price, url }) => {
   const dispatch = useDispatch();
   //console.log( id, name, description, stock, price, url );
   const handleEntryClick = () => {
     dispatch(
-      activeNote(id, {
+      activeProduct(id, {
         name,
         description,
         stock,
@@ -19,12 +19,12 @@ export const JournalEntry = ({ id, name, description, stock, price, url }) => {
 
   return (
     <div
-      className="journal__entry pointer animate__animated animate__fadeIn animate__faster"
+      className="app__entry pointer animate__animated animate__fadeIn animate__faster"
       onClick={handleEntryClick}
     >
       {url && (
         <div
-          className="journal__entry-picture"
+          className="app__entry-picture"
           style={{
             backgroundSize: "cover",
             backgroundImage: `url(${url})`,
@@ -32,20 +32,17 @@ export const JournalEntry = ({ id, name, description, stock, price, url }) => {
         ></div>
       )}
 
-      <div className="journal__entry-body">
-        <p className="journal__entry-content">
-          <span className="journal__entry-title">Name</span> {name}
-        </p>
-        <p className="journal__entry-content">
-          <span className="journal__entry-title">Description</span>
+      <div className="app__entry-body">
+        <div className="app__entry-card">
+          <span className="app__entry-title mb-1">Name:</span> {name}
+          <br/>
+          <span className="app__entry-title mb-1">Description:</span>
           {description}
-        </p>
-        <p className="journal__entry-content">
-          <span className="journal__entry-title">Stock</span> {stock}
-        </p>
-        <p className="journal__entry-content">
-          <span className="journal__entry-title">Price</span> {price}
-        </p>
+          <br/>
+          <span className="app__entry-title mb-1">Stock:</span> {stock}
+          <br/>
+          <span className="app__entry-title mb-1">Price:</span> {price}
+        </div>
       </div>
     </div>
   );
